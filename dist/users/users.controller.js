@@ -12,67 +12,56 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlogController = void 0;
+exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
-const blog_service_1 = require("./blog.service");
-let BlogController = class BlogController {
-    constructor(blogService) {
-        this.blogService = blogService;
+const users_service_1 = require("./users.service");
+let UsersController = class UsersController {
+    constructor(usersService) {
+        this.usersService = usersService;
     }
     findAll() {
-        return this.blogService.findAll();
+        return this.usersService.findAll();
     }
     findOne(id) {
-        return this.blogService.findOne(id);
+        return this.usersService.findOne(id);
     }
-    create(blog) {
-        return this.blogService.create(blog);
-    }
-    update(id, blog) {
-        return this.blogService.update(id, blog);
+    create(user) {
+        return this.usersService.create(user);
     }
     delete(id) {
-        return this.blogService.delete(id);
+        return this.usersService.delete(id);
     }
 };
-exports.BlogController = BlogController;
+exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "findAll", null);
+], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "findOne", null);
+], UsersController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "create", null);
-__decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
-    __metadata("design:returntype", Promise)
-], BlogController.prototype, "update", null);
+], UsersController.prototype, "create", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "delete", null);
-exports.BlogController = BlogController = __decorate([
-    (0, common_1.Controller)('blogs'),
-    __metadata("design:paramtypes", [blog_service_1.BlogService])
-], BlogController);
-//# sourceMappingURL=blog.controller.js.map
+], UsersController.prototype, "delete", null);
+exports.UsersController = UsersController = __decorate([
+    (0, common_1.Controller)('users'),
+    __metadata("design:paramtypes", [users_service_1.UsersService])
+], UsersController);
+//# sourceMappingURL=users.controller.js.map

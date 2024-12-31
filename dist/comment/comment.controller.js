@@ -12,50 +12,51 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlogController = void 0;
+exports.CommentController = void 0;
 const common_1 = require("@nestjs/common");
-const blog_service_1 = require("./blog.service");
-let BlogController = class BlogController {
-    constructor(blogService) {
-        this.blogService = blogService;
+const comment_service_1 = require("./comment.service");
+let CommentController = class CommentController {
+    constructor(commentService) {
+        this.commentService = commentService;
+        console.log('innitial comments controller');
     }
     findAll() {
-        return this.blogService.findAll();
+        return this.commentService.findAll();
     }
     findOne(id) {
-        return this.blogService.findOne(id);
+        return this.commentService.findOne(id);
     }
-    create(blog) {
-        return this.blogService.create(blog);
+    create(comment) {
+        return this.commentService.create(comment);
     }
-    update(id, blog) {
-        return this.blogService.update(id, blog);
+    update(id, updatedComment) {
+        return this.commentService.update(id, updatedComment);
     }
     delete(id) {
-        return this.blogService.delete(id);
+        return this.commentService.delete(id);
     }
 };
-exports.BlogController = BlogController;
+exports.CommentController = CommentController;
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "findAll", null);
+], CommentController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "findOne", null);
+], CommentController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "create", null);
+], CommentController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -63,16 +64,16 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "update", null);
+], CommentController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], BlogController.prototype, "delete", null);
-exports.BlogController = BlogController = __decorate([
-    (0, common_1.Controller)('blogs'),
-    __metadata("design:paramtypes", [blog_service_1.BlogService])
-], BlogController);
-//# sourceMappingURL=blog.controller.js.map
+], CommentController.prototype, "delete", null);
+exports.CommentController = CommentController = __decorate([
+    (0, common_1.Controller)('comments'),
+    __metadata("design:paramtypes", [comment_service_1.CommentService])
+], CommentController);
+//# sourceMappingURL=comment.controller.js.map

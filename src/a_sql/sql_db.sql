@@ -19,9 +19,9 @@ CREATE TABLE `blog` (
 
 CREATE TABLE `comment` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned DEFAULT NOT NULL,
-  `blog_id` bigint(20) unsigned DEFAULT NOT NULL,
-  `comment` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `blog_id` bigint(20) unsigned DEFAULT NULL,
+  `comment` text DEFAULT NULL,
   `createdAt` datetime NULL DEFAULT NULL,
   `updatedAt` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`)

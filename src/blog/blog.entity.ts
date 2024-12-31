@@ -4,15 +4,19 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm';
+import { User } from '../users/user.entity';
+import { Comment } from '../comment/comment.entity';
 
 @Entity()
 export class Blog {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @ManyToOne(() => User, (user) => user.blogs, { nullable: true, onDelete: 'SET NULL' })
+  user: User;
 
   @Column({ nullable: true })
   community_id: number;
@@ -23,9 +27,12 @@ export class Blog {
   @Column({ type: 'text', nullable: true })
   content: string;
 
-  @CreateDateColumn({ type: 'datetime', name: 'created_at' }) // กำหนดให้บันทึกเวลาอัตโนมัติเมื่อสร้าง
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'updated_at' }) // กำหนดให้บันทึกเวลาอัตโนมัติเมื่อมีการแก้ไข
+  @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
+
+  @OneToMany(() => Comment, (comment) => comment.blog)
+  comments: Comment[];
 }

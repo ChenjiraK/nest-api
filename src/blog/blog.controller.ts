@@ -12,13 +12,10 @@ import { Blog } from './blog.entity';
 
 @Controller('blogs')
 export class BlogController {
-  constructor(private readonly blogService: BlogService) {
-    console.log('BlogController initialized');
-  }
+  constructor(private readonly blogService: BlogService) {}
 
   @Get()
   findAll(): Promise<Blog[]> {
-    console.log('Fetching all blogs...');
     return this.blogService.findAll();
   }
 

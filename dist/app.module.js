@@ -12,6 +12,8 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const blog_entity_1 = require("./blog/blog.entity");
 const blog_module_1 = require("./blog/blog.module");
+const comment_module_1 = require("./comment/comment.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,6 +32,8 @@ exports.AppModule = AppModule = __decorate([
                 synchronize: true,
             }),
             blog_module_1.BlogModule,
+            comment_module_1.CommentModule,
+            users_module_1.UsersModule,
         ],
     })
 ], AppModule);
