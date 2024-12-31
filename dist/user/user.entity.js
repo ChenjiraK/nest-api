@@ -9,41 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Blog = void 0;
+exports.User = void 0;
 const typeorm_1 = require("typeorm");
-const user_entity_1 = require("../user/user.entity");
-let Blog = class Blog {
+let User = class User {
 };
-exports.Blog = Blog;
+exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
     __metadata("design:type", Number)
-], Blog.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.id),
-    __metadata("design:type", Number)
-], Blog.prototype, "user_id", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", Number)
-], Blog.prototype, "community_id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Blog.prototype, "title", void 0);
+], User.prototype, "username", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Blog.prototype, "content", void 0);
+], User.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "image_url", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Blog.prototype, "createdAt", void 0);
+], User.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Blog.prototype, "updatedAt", void 0);
-exports.Blog = Blog = __decorate([
-    (0, typeorm_1.Entity)('blog')
-], Blog);
-//# sourceMappingURL=blog.entity.js.map
+], User.prototype, "updatedAt", void 0);
+exports.User = User = __decorate([
+    (0, typeorm_1.Entity)('users')
+], User);
+//# sourceMappingURL=user.entity.js.map

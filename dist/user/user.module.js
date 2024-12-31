@@ -6,20 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentModule = void 0;
+exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const comment_service_1 = require("./comment.service");
-const comment_controller_1 = require("./comment.controller");
-const comment_entity_1 = require("./comment.entity");
-let CommentModule = class CommentModule {
+const user_service_1 = require("./user.service");
+const user_controller_1 = require("./user.controller");
+const user_entity_1 = require("./user.entity");
+let UserModule = class UserModule {
 };
-exports.CommentModule = CommentModule;
-exports.CommentModule = CommentModule = __decorate([
+exports.UserModule = UserModule;
+exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([comment_entity_1.Comment])],
-        controllers: [comment_controller_1.CommentController],
-        providers: [comment_service_1.CommentService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User])],
+        controllers: [user_controller_1.UserController],
+        providers: [user_service_1.UserService],
     })
-], CommentModule);
-//# sourceMappingURL=comment.module.js.map
+], UserModule);
+//# sourceMappingURL=user.module.js.map

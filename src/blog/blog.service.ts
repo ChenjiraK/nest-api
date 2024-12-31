@@ -7,28 +7,29 @@ import { Blog } from './blog.entity';
 export class BlogService {
   constructor(
     @InjectRepository(Blog)
-    private readonly blogRepository: Repository<Blog>,
+    private readonly blogRepository: Repository<Blog>
   ) {}
 
-  async findAll(): Promise<Blog[]> {
-    return await this.blogRepository.find();
+  findAll() {
+    return this.blogRepository.find({ relations: ['user_id'] });
   }
 
-  async findOne(id: number): Promise<Blog> {
-    return await this.blogRepository.findOneBy({ id });
+  findOne(id: number) {
+    return this.blogRepository.findOne({
+      where: { id },
+      relations: ['user_id'],
+    });
   }
 
-  async create(blog: Partial<Blog>): Promise<Blog> {
-    const newBlog = this.blogRepository.create(blog);
-    return await this.blogRepository.save(newBlog);
+  create(data: Partial<Blog>) {
+    return this.blogRepository.save(data);
   }
 
-  async update(id: number, blog: Partial<Blog>): Promise<Blog> {
-    await this.blogRepository.update(id, blog);
-    return this.findOne(id);
+  update(id: number, data: Partial<Blog>) {
+    return this.blogRepository.update(id, data);
   }
 
-  async delete(id: number): Promise<void> {
-    await this.blogRepository.delete(id);
+  delete(id: number) {
+    return this.blogRepository.delete(id);
   }
 }

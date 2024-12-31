@@ -7,23 +7,21 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../user/user.entity';
+import { Blog } from '../blog/blog.entity';
 
-@Entity('blog')
-export class Blog {
+@Entity('comment')
+export class Comment {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
   @ManyToOne(() => User, (user) => user.id)
   user_id: number;
 
-  @Column({ nullable: true })
-  community_id: number;
+  @ManyToOne(() => Blog, (blog) => blog.id)
+  blog_id: number;
 
   @Column({ nullable: true })
-  title: string;
-
-  @Column({ type: 'text', nullable: true })
-  content: string;
+  comment: string;
 
   @CreateDateColumn()
   createdAt: Date;

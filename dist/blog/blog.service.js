@@ -21,22 +21,23 @@ let BlogService = class BlogService {
     constructor(blogRepository) {
         this.blogRepository = blogRepository;
     }
-    async findAll() {
-        return await this.blogRepository.find();
+    findAll() {
+        return this.blogRepository.find({ relations: ['user_id'] });
     }
-    async findOne(id) {
-        return await this.blogRepository.findOneBy({ id });
+    findOne(id) {
+        return this.blogRepository.findOne({
+            where: { id },
+            relations: ['user_id'],
+        });
     }
-    async create(blog) {
-        const newBlog = this.blogRepository.create(blog);
-        return await this.blogRepository.save(newBlog);
+    create(data) {
+        return this.blogRepository.save(data);
     }
-    async update(id, blog) {
-        await this.blogRepository.update(id, blog);
-        return this.findOne(id);
+    update(id, data) {
+        return this.blogRepository.update(id, data);
     }
-    async delete(id) {
-        await this.blogRepository.delete(id);
+    delete(id) {
+        return this.blogRepository.delete(id);
     }
 };
 exports.BlogService = BlogService;

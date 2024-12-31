@@ -11,8 +11,11 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const blog_entity_1 = require("./blog/blog.entity");
+const comment_entity_1 = require("./comment/comment.entity");
+const user_entity_1 = require("./user/user.entity");
 const blog_module_1 = require("./blog/blog.module");
 const comment_module_1 = require("./comment/comment.module");
+const user_module_1 = require("./user/user.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,11 +30,12 @@ exports.AppModule = AppModule = __decorate([
                 username: process.env.DB_USER,
                 password: process.env.DB_PASSWORD,
                 database: process.env.DB_NAME,
-                entities: [blog_entity_1.Blog],
+                entities: [blog_entity_1.Blog, comment_entity_1.Comment, user_entity_1.User],
                 synchronize: true,
             }),
             blog_module_1.BlogModule,
             comment_module_1.CommentModule,
+            user_module_1.UserModule,
         ],
     })
 ], AppModule);

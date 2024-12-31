@@ -6,7 +6,7 @@ import { BlogController } from './blog.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Blog])],
-  controllers: [BlogController], // ตรวจสอบตรงนี้
-  providers: [BlogService], // และตรงนี้
+  controllers: [BlogController],
+  providers: [BlogService],
 })
 export class BlogModule {}

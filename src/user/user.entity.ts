@@ -2,28 +2,23 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { User } from '../user/user.entity';
 
-@Entity('blog')
-export class Blog {
+@Entity('users')
+export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.id)
-  user_id: number;
+  @Column({ nullable: true })
+  username: string;
 
   @Column({ nullable: true })
-  community_id: number;
+  name: string;
 
   @Column({ nullable: true })
-  title: string;
-
-  @Column({ type: 'text', nullable: true })
-  content: string;
+  image_url: string;
 
   @CreateDateColumn()
   createdAt: Date;
