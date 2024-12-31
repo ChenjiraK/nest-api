@@ -18,7 +18,7 @@ export class User {
   name: string;
 
   @Column({ nullable: true })
-  image_url: string;
+  imageUrl: string;
 
   @CreateDateColumn()
   createdAt: Date;

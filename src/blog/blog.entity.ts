@@ -10,7 +10,7 @@ import {
 import { User } from '../user/user.entity';
 import { Comment } from '../comment/comment.entity';
 
-@Entity('blog')
+@Entity('blogs')
 export class Blog {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -18,11 +18,11 @@ export class Blog {
   @ManyToOne(() => User, (user) => user.id, { eager: true }) // Eager loading ensures the user is automatically loaded
   user: User;
 
-  @OneToMany(() => Comment, (comment) => comment.blog_id)
+  @OneToMany(() => Comment, (comment) => comment.blog, { eager: true })
   comments: Comment[];
 
   @Column({ nullable: true })
-  community_id: number;
+  communityId: number;
 
   @Column({ nullable: true })
   title: string;

@@ -4,7 +4,7 @@ export declare class Blog {
     id: number;
     user: User;
     comments: Comment[];
-    community_id: number;
+    communityId: number;
     title: string;
     content: string;
     createdAt: Date;

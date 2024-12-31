@@ -38,8 +38,6 @@ let BlogService = class BlogService {
         return this.blogRepository.save(data);
     }
     update(id, data) {
-        console.log('id', id);
-        console.log(data);
         return this.blogRepository.update(id, data);
     }
     delete(id) {

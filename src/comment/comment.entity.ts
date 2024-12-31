@@ -9,16 +9,16 @@ import {
 import { User } from '../user/user.entity';
 import { Blog } from '../blog/blog.entity';
 
-@Entity('comment')
+@Entity('comments')
 export class Comment {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.id, { eager: true }) // Eager loading ensures the user is automatically loaded
+  @ManyToOne(() => User, (user) => user.id, { eager: true })
   user: User;
 
   @ManyToOne(() => Blog, (blog) => blog.id)
-  blog_id: number;
+  blog: number;
 
   @Column({ nullable: true })
   comment: string;

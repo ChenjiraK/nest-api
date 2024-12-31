@@ -27,7 +27,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.ManyToOne)(() => blog_entity_1.Blog, (blog) => blog.id),
     __metadata("design:type", Number)
-], Comment.prototype, "blog_id", void 0);
+], Comment.prototype, "blog", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
@@ -41,6 +41,6 @@ __decorate([
     __metadata("design:type", Date)
 ], Comment.prototype, "updatedAt", void 0);
 exports.Comment = Comment = __decorate([
-    (0, typeorm_1.Entity)('comment')
+    (0, typeorm_1.Entity)('comments')
 ], Comment);
 //# sourceMappingURL=comment.entity.js.map

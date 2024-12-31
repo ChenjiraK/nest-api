@@ -30,8 +30,6 @@ export class BlogService {
   }
 
   update(id: number, data: Partial<Blog>) {
-    console.log('id', id);
-    console.log(data);
     return this.blogRepository.update(id, data);
   }
 

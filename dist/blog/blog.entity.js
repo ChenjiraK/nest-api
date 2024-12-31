@@ -25,13 +25,13 @@ __decorate([
     __metadata("design:type", user_entity_1.User)
 ], Blog.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => comment_entity_1.Comment, (comment) => comment.blog_id),
+    (0, typeorm_1.OneToMany)(() => comment_entity_1.Comment, (comment) => comment.blog, { eager: true }),
     __metadata("design:type", Array)
 ], Blog.prototype, "comments", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], Blog.prototype, "community_id", void 0);
+], Blog.prototype, "communityId", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
@@ -49,6 +49,6 @@ __decorate([
     __metadata("design:type", Date)
 ], Blog.prototype, "updatedAt", void 0);
 exports.Blog = Blog = __decorate([
-    (0, typeorm_1.Entity)('blog')
+    (0, typeorm_1.Entity)('blogs')
 ], Blog);
 //# sourceMappingURL=blog.entity.js.map
