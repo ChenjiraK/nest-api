@@ -14,8 +14,8 @@ export class Comment {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.id)
-  user_id: number;
+  @ManyToOne(() => User, (user) => user.id, { eager: true }) // Eager loading ensures the user is automatically loaded
+  user: User;
 
   @ManyToOne(() => Blog, (blog) => blog.id)
   blog_id: number;

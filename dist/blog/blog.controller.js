@@ -19,8 +19,8 @@ let BlogController = class BlogController {
     constructor(blogService) {
         this.blogService = blogService;
     }
-    findAll() {
-        return this.blogService.findAll();
+    findAll(query) {
+        return this.blogService.findAll(query);
     }
     findOne(id) {
         return this.blogService.findOne(id);
@@ -38,8 +38,9 @@ let BlogController = class BlogController {
 exports.BlogController = BlogController;
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], BlogController.prototype, "findAll", null);
 __decorate([
@@ -72,7 +73,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BlogController.prototype, "delete", null);
 exports.BlogController = BlogController = __decorate([
-    (0, common_1.Controller)('blogs'),
+    (0, common_1.Controller)('api/blogs'),
     __metadata("design:paramtypes", [blog_service_1.BlogService])
 ], BlogController);
 //# sourceMappingURL=blog.controller.js.map

@@ -21,19 +21,25 @@ let BlogService = class BlogService {
     constructor(blogRepository) {
         this.blogRepository = blogRepository;
     }
-    findAll() {
-        return this.blogRepository.find({ relations: ['user_id'] });
+    findAll(query) {
+        const where = {};
+        if (query.user_id) {
+            where.user = { id: query.user_id };
+        }
+        return this.blogRepository.find({ where, relations: ['user', 'comments'] });
     }
     findOne(id) {
         return this.blogRepository.findOne({
             where: { id },
-            relations: ['user_id'],
+            relations: ['user', 'comments'],
         });
     }
     create(data) {
         return this.blogRepository.save(data);
     }
     update(id, data) {
+        console.log('id', id);
+        console.log(data);
         return this.blogRepository.update(id, data);
     }
     delete(id) {

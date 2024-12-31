@@ -22,12 +22,12 @@ let CommentService = class CommentService {
         this.commentRepository = commentRepository;
     }
     findAll() {
-        return this.commentRepository.find({ relations: ['user_id', 'blog_id'] });
+        return this.commentRepository.find({ relations: ['user'] });
     }
     findOne(id) {
         return this.commentRepository.findOne({
             where: { id },
-            relations: ['user_id', 'blog_id'],
+            relations: ['user'],
         });
     }
     create(data) {

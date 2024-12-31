@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Query,
   Param,
   Put,
   Delete,
@@ -10,13 +11,13 @@ import {
 import { BlogService } from './blog.service';
 import { Blog } from './blog.entity';
 
-@Controller('blogs')
+@Controller('api/blogs')
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
   @Get()
-  findAll() {
-    return this.blogService.findAll();
+  findAll(@Query() query: any) {
+    return this.blogService.findAll(query);
   }
 
   @Get(':id')

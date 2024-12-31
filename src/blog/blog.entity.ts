@@ -5,16 +5,21 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { User } from '../user/user.entity';
+import { Comment } from '../comment/comment.entity';
 
 @Entity('blog')
 export class Blog {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => User, (user) => user.id)
-  user_id: number;
+  @ManyToOne(() => User, (user) => user.id, { eager: true }) // Eager loading ensures the user is automatically loaded
+  user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.blog_id)
+  comments: Comment[];
 
   @Column({ nullable: true })
   community_id: number;

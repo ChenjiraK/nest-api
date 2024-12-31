@@ -10,7 +10,7 @@ import {
 import { CommentService } from './comment.service';
 import { Comment } from './comment.entity';
 
-@Controller('comments')
+@Controller('api/comments')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 

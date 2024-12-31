@@ -11,13 +11,13 @@ export class CommentService {
   ) {}
 
   findAll() {
-    return this.commentRepository.find({ relations: ['user_id', 'blog_id'] });
+    return this.commentRepository.find({ relations: ['user'] });
   }
 
   findOne(id: number) {
     return this.commentRepository.findOne({
       where: { id },
-      relations: ['user_id', 'blog_id'],
+      relations: ['user'],
     });
   }
 

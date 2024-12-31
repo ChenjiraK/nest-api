@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Blog = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../user/user.entity");
+const comment_entity_1 = require("../comment/comment.entity");
 let Blog = class Blog {
 };
 exports.Blog = Blog;
@@ -20,9 +21,13 @@ __decorate([
     __metadata("design:type", Number)
 ], Blog.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.id),
-    __metadata("design:type", Number)
-], Blog.prototype, "user_id", void 0);
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.id, { eager: true }),
+    __metadata("design:type", user_entity_1.User)
+], Blog.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => comment_entity_1.Comment, (comment) => comment.blog_id),
+    __metadata("design:type", Array)
+], Blog.prototype, "comments", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
