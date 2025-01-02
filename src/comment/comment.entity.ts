@@ -20,7 +20,7 @@ export class Comment {
   @ManyToOne(() => Blog, (blog) => blog.id)
   blog: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   comment: string;
 
   @CreateDateColumn()

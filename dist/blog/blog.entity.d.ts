@@ -7,6 +7,7 @@ export declare class Blog {
     communityId: number;
     title: string;
     content: string;
+    isFavorite: boolean;
     createdAt: Date;
     updatedAt: Date;
 }

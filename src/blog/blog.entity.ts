@@ -30,6 +30,9 @@ export class Blog {
   @Column({ type: 'text', nullable: true })
   content: string;
 
+  @Column({ nullable: true })
+  isFavorite: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 

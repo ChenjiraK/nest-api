@@ -41,6 +41,10 @@ __decorate([
     __metadata("design:type", String)
 ], Blog.prototype, "content", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Boolean)
+], Blog.prototype, "isFavorite", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Blog.prototype, "createdAt", void 0);

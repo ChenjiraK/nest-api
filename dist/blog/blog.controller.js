@@ -15,18 +15,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogController = void 0;
 const common_1 = require("@nestjs/common");
 const blog_service_1 = require("./blog.service");
+const passport_1 = require("@nestjs/passport");
+const jwt_auth_guard_1 = require("../middleware/jwt-auth.guard");
 let BlogController = class BlogController {
     constructor(blogService) {
         this.blogService = blogService;
     }
     findAll(query) {
-        return this.blogService.findAll(query);
+        return this.blogService.findAll(null, query);
+    }
+    findBlogsByUserId(req, query) {
+        const userId = req.user.userId ?? null;
+        if (!userId) {
+            throw new Error('User not found');
+        }
+        return this.blogService.findAll(userId, query);
     }
     findOne(id) {
         return this.blogService.findOne(id);
     }
-    create(blog) {
-        return this.blogService.create(blog);
+    create(blog, req) {
+        const userId = req.user.userId;
+        return this.blogService.create(blog, userId);
     }
     update(id, blog) {
         return this.blogService.update(id, blog);
@@ -44,6 +54,15 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BlogController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)('myblogs'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], BlogController.prototype, "findBlogsByUserId", null);
+__decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -52,9 +71,11 @@ __decorate([
 ], BlogController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], BlogController.prototype, "create", null);
 __decorate([

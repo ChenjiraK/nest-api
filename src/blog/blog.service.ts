@@ -1,21 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import { Blog } from './blog.entity';
+import { User } from '../user/user.entity';
 
 @Injectable()
 export class BlogService {
   constructor(
     @InjectRepository(Blog)
-    private readonly blogRepository: Repository<Blog>
+    private readonly blogRepository: Repository<Blog>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
   ) {}
 
-  findAll(query: any) {
-    const where: any = {};
-    if (query.user_id) {
-      where.user = { id: query.user_id };
-    }
-    return this.blogRepository.find({ where, relations: ['user', 'comments'] });
+  async findAll(userId?:number | null, query?:any) {
+    const queryBuilder = this.blogRepository.createQueryBuilder('blog')
+      .leftJoinAndSelect('blog.user', 'user')
+      .leftJoinAndSelect('blog.comments', 'comments');
+
+      if (userId) {
+        //blog.userId from @ManyToOne User
+        queryBuilder.andWhere('blog.userId = :userId', { userId });
+      }
+
+      if (query?.search) {
+        //search title or content
+        queryBuilder.andWhere(
+          '(blog.title LIKE :search OR blog.content LIKE :search)',
+          { search: `%${query.search}%` }
+        );
+      }
+      return queryBuilder.getMany();
   }
 
   findOne(id: number) {
@@ -25,8 +40,15 @@ export class BlogService {
     });
   }
 
-  create(data: Partial<Blog>) {
-    return this.blogRepository.save(data);
+  async create(data: Partial<Blog>, userId: number) {
+    const user = await this.userRepository.findOneBy({ id: userId });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return this.blogRepository.create({
+      ...data,
+      user,
+    });
   }
 
   update(id: number, data: Partial<Blog>) {

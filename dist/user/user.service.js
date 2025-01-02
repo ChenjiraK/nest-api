@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
+const jwt_1 = require("@nestjs/jwt");
 let UserService = class UserService {
-    constructor(userRepository) {
+    constructor(userRepository, jwtService) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
     findAll() {
         return this.userRepository.find();
@@ -36,11 +38,25 @@ let UserService = class UserService {
     delete(id) {
         return this.userRepository.delete(id);
     }
+    async login(user) {
+        const payload = { username: user.username, sub: user.id };
+        return {
+            access_token: this.jwtService.sign(payload),
+        };
+    }
+    async validateUser(username) {
+        const user = await this.userRepository.findOneBy({ username });
+        if (!user || !Boolean(username === user.username)) {
+            throw new common_1.UnauthorizedException('Username Invalid');
+        }
+        return user;
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        jwt_1.JwtService])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

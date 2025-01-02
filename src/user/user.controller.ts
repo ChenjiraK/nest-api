@@ -38,4 +38,12 @@ export class UserController {
   delete(@Param('id') id: number) {
     return this.userService.delete(id);
   }
+
+  @Post('login')
+  async login(
+    @Body('username') username: string
+  ): Promise<{ access_token: string }> {
+    const user = await this.userService.validateUser(username);
+    return this.userService.login(user);
+  }
 }

@@ -17,16 +17,23 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const blog_entity_1 = require("./blog.entity");
+const user_entity_1 = require("../user/user.entity");
 let BlogService = class BlogService {
-    constructor(blogRepository) {
+    constructor(blogRepository, userRepository) {
         this.blogRepository = blogRepository;
+        this.userRepository = userRepository;
     }
-    findAll(query) {
-        const where = {};
-        if (query.user_id) {
-            where.user = { id: query.user_id };
+    async findAll(userId, query) {
+        const queryBuilder = this.blogRepository.createQueryBuilder('blog')
+            .leftJoinAndSelect('blog.user', 'user')
+            .leftJoinAndSelect('blog.comments', 'comments');
+        if (userId) {
+            queryBuilder.andWhere('blog.userId = :userId', { userId });
         }
-        return this.blogRepository.find({ where, relations: ['user', 'comments'] });
+        if (query?.search) {
+            queryBuilder.andWhere('(blog.title LIKE :search OR blog.content LIKE :search)', { search: `%${query.search}%` });
+        }
+        return queryBuilder.getMany();
     }
     findOne(id) {
         return this.blogRepository.findOne({
@@ -34,8 +41,15 @@ let BlogService = class BlogService {
             relations: ['user', 'comments'],
         });
     }
-    create(data) {
-        return this.blogRepository.save(data);
+    async create(data, userId) {
+        const user = await this.userRepository.findOneBy({ id: userId });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return this.blogRepository.create({
+            ...data,
+            user,
+        });
     }
     update(id, data) {
         return this.blogRepository.update(id, data);
@@ -48,6 +62,8 @@ exports.BlogService = BlogService;
 exports.BlogService = BlogService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(blog_entity_1.Blog)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], BlogService);
 //# sourceMappingURL=blog.service.js.map

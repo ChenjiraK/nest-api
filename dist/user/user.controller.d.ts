@@ -8,4 +8,7 @@ export declare class UserController {
     create(user: Partial<User>): Promise<Partial<User> & User>;
     update(id: number, user: Partial<User>): Promise<import("typeorm").UpdateResult>;
     delete(id: number): Promise<import("typeorm").DeleteResult>;
+    login(username: string): Promise<{
+        access_token: string;
+    }>;
 }
